@@ -9,7 +9,8 @@
     "export:image-pdf": "node scripts/export-image-pdf.mjs",
     "export:pdf": "node scripts/export-pdf.mjs",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "all": "^0.0.0",
@@ -20,6 +21,7 @@
     "react-dom": "^19.2.5"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.37.0",
     "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.2.4",
     "@types/node": "^24.12.2",
@@ -34,6 +36,7 @@
     "tailwindcss": "^4.2.4",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "wrangler": "^4.91.0"
   }
 }
