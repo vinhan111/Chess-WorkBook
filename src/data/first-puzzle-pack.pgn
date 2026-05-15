@@ -1,0 +1,511 @@
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "783"]
+[SetUp "1"]
+[FEN "8/p5k1/1p5p/2p1rp2/P1Pq4/2Q1R3/6P1/6K1 w - - 0 39"]
+
+39. Qxd4 cxd4 40. Rxe5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "704"]
+[SetUp "1"]
+[FEN "2kr1bnr/ppp1pppp/8/1P2n2q/6b1/2N2N2/P1PPBPPP/R1BQ1RK1 w - - 1 9"]
+
+9. Nxe5 Qxe5 10. Bxg4+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "781"]
+[SetUp "1"]
+[FEN "4r1k1/p5r1/P3P1Q1/1P5K/7P/6P1/8/8 b - - 0 73"]
+
+73... Rxg6 74. Kxg6 Rxe6+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "619"]
+[SetUp "1"]
+[FEN "8/pp1r2k1/7p/8/3q1p2/P1QNpP2/1P4KP/4R3 b - - 3 35"]
+
+35... Qxc3 36. bxc3 Rxd3 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "788"]
+[SetUp "1"]
+[FEN "r4rk1/ppp2pp1/7p/3Pb1qb/2P1p3/P5B1/1PPQ1PK1/RN3R2 w - - 0 18"]
+
+18. Qxg5 hxg5 19. Bxe5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "799"]
+[SetUp "1"]
+[FEN "r4r2/pp3qbk/2p3pp/3n1b2/2BPp3/2P1N3/PPQ3PP/R1B2RK1 b - - 7 20"]
+
+20... Nxe3 21. Bxe3 Qxc4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "601"]
+[SetUp "1"]
+[FEN "3qr1k1/pb2p2p/1p2Npp1/2p5/8/P7/5PPP/R3R1K1 w - - 2 26"]
+
+26. Nxd8 Rxd8 27. Rxe7 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "745"]
+[SetUp "1"]
+[FEN "2kr3r/2p3pp/p4p2/1p1np2b/8/2P1B2P/PP1N1PPN/R3R1K1 b - - 1 19"]
+
+19... Nxe3 20. Rxe3 Rxd2 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "644"]
+[SetUp "1"]
+[FEN "4r2k/p1bR4/2p5/2Pp1Np1/2bP4/2N4P/P1B2PP1/6K1 b - - 0 27"]
+
+27... Re1# *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "787"]
+[SetUp "1"]
+[FEN "6k1/pp1q2p1/4n3/2BQ4/2P5/PP5P/6P1/7K b - - 0 39"]
+
+39... Qxd5 40. cxd5 Nxc5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "782"]
+[SetUp "1"]
+[FEN "r3r1k1/pp1qbppp/2pp4/5QB1/4P3/8/PPP2PPP/R3R1K1 b - - 1 14"]
+
+14... Qxf5 15. exf5 Bxg5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "755"]
+[SetUp "1"]
+[FEN "r1bqk1nr/pppp1ppp/2n5/4b3/3Np3/1P4P1/PBPPPP1P/RN1QKB1R w KQkq - 2 6"]
+
+6. Nxc6 dxc6 7. Bxe5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "697"]
+[SetUp "1"]
+[FEN "3b4/1Qq2k2/1BPp2pp/1P1P1p2/8/8/6PP/6K1 b - - 0 40"]
+
+40... Qxb7 41. cxb7 Bxb6+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "746"]
+[SetUp "1"]
+[FEN "r2qr1k1/pppnbppp/5n2/6B1/3PN3/2P5/PP3PPP/RN1QR1K1 b - - 0 13"]
+
+13... Nxe4 14. Rxe4 Bxg5 15. Rxe8+ Qxe8 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "789"]
+[SetUp "1"]
+[FEN "8/8/p4kp1/1p1p1p2/3P4/1r1B4/2P4K/8 w - - 0 41"]
+
+41. cxb3 a5 42. Bxb5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "767"]
+[SetUp "1"]
+[FEN "8/6kp/2pq2p1/p3np2/P1BQp2P/2P3P1/1P3PK1/8 b - - 4 33"]
+
+33... Qxd4 34. cxd4 Nxc4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "705"]
+[SetUp "1"]
+[FEN "r4b1r/1pp1k1pp/p3n3/8/3qQB2/2N5/PPP2PPP/R4RK1 b - - 0 16"]
+
+16... Qxe4 17. Nxe4 Nxf4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "794"]
+[SetUp "1"]
+[FEN "5n2/pp1r2kp/3PR3/2pP1P2/2P5/6PP/P6K/8 b - - 4 35"]
+
+35... Nxe6 36. dxe6 Rxd6 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "776"]
+[SetUp "1"]
+[FEN "r6r/1pp1bp1k/7P/4p3/pnPpPqp1/1P1P1R2/1P2QP2/3RK3 w - - 0 29"]
+
+29. Rxf4 exf4 30. Qxg4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "748"]
+[SetUp "1"]
+[FEN "rnb1k2r/pp1p1ppp/8/q2np3/1b6/2N5/PP1BPPPP/R2QKBNR w KQkq - 0 8"]
+
+8. Nxd5 Qxd5 9. Bxb4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "721"]
+[SetUp "1"]
+[FEN "r4rk1/p2qbppp/2p1p3/1np5/Q7/1PN3P1/P2PPP1P/R1BR2K1 b - - 0 14"]
+
+14... Nxc3 15. dxc3 Qxd1+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "784"]
+[SetUp "1"]
+[FEN "2r1k3/2q2pr1/p2b2bp/3Pp3/2p1N2P/2P2PB1/PP2Q3/2KR3R b - - 1 23"]
+
+23... Bxe4 24. fxe4 Rxg3 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "784"]
+[SetUp "1"]
+[FEN "r6k/1pq1b1p1/p1np1r1p/2pQp3/4P2B/2P2N2/PP3PPP/R4RK1 b - - 2 18"]
+
+18... Rxf3 19. gxf3 Bxh4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "787"]
+[SetUp "1"]
+[FEN "3q2k1/p1rnn1pp/1p2pr2/2p1NpN1/3P4/3QP3/PP3PPP/2R2RK1 b - - 3 17"]
+
+17... Nxe5 18. dxe5 Qxd3 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "799"]
+[SetUp "1"]
+[FEN "2r3k1/2P2pp1/4b1q1/4N3/5r1p/4R2P/5PP1/2R3K1 w - - 0 33"]
+
+33. Nxg6 fxg6 34. Rxe6 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "680"]
+[SetUp "1"]
+[FEN "1rr3k1/1q4p1/p1Q2p1p/4p3/8/1P4P1/P4PKP/2R1R3 w - - 4 30"]
+
+30. Qxb7 Rxb7 31. Rxc8+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "799"]
+[SetUp "1"]
+[FEN "r2q1rk1/1p2bppp/p1np1n2/5PB1/4N3/3B4/PPP2PPP/R2Q1RK1 b - - 0 12"]
+
+12... Nxe4 13. Bxe4 Bxg5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "775"]
+[SetUp "1"]
+[FEN "r2qkb1r/pppbpppp/2n5/1B6/3N4/2Q5/PPPP1PPP/R1B1K2R b KQkq - 6 8"]
+
+8... Nxd4 9. Qxd4 Bxb5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "664"]
+[SetUp "1"]
+[FEN "6r1/2k1n3/8/5RP1/6P1/4P3/P4KP1/8 b - - 8 50"]
+
+50... Nxf5 51. gxf5 Rxg5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "652"]
+[SetUp "1"]
+[FEN "4b3/3r2k1/p1NR1p2/2P2P1p/1P5K/P7/8/8 b - - 0 44"]
+
+44... Rxd6 45. cxd6 Bxc6 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "713"]
+[SetUp "1"]
+[FEN "r1b1r3/pp3pkp/8/3Pq3/1P1Q2p1/1B2R3/2P1N1P1/R5K1 b - - 0 27"]
+
+27... Qxd4 28. Nxd4 Rxe3 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "549"]
+[SetUp "1"]
+[FEN "2r2k2/p1n2ppp/q3p3/8/1PQ1P3/P4P2/6PP/2R2K2 w - - 1 26"]
+
+26. Qxa6 Nxa6 27. Rxc8+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "757"]
+[SetUp "1"]
+[FEN "3r2k1/6p1/1R5p/pp6/1r3P2/1P1R2P1/2P3P1/7K b - - 0 32"]
+
+32... Rxd3 33. cxd3 Rxb3 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "615"]
+[SetUp "1"]
+[FEN "3r2k1/pp4pp/2p1r3/3q4/4Q1P1/7P/2P1R1K1/4R3 w - - 0 29"]
+
+29. Qxd5 Rxd5 30. Rxe6 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "744"]
+[SetUp "1"]
+[FEN "4Q3/6pk/5p1p/3pqn2/8/6NP/5PPK/8 w - - 9 35"]
+
+35. Qxe5 fxe5 36. Nxf5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "482"]
+[SetUp "1"]
+[FEN "2r3k1/5ppp/4q3/p7/1pQ1P3/P2P3P/KP6/2R5 w - - 4 29"]
+
+29. Qxe6 fxe6 30. Rxc8+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "787"]
+[SetUp "1"]
+[FEN "2k1r3/1pp5/pb1qp1R1/3pQp2/3P1N2/P3PP2/1PP5/2K5 b - - 8 29"]
+
+29... Qxe5 30. dxe5 Bxe3+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "797"]
+[SetUp "1"]
+[FEN "r3k2r/p4ppp/2p1p3/3np3/1b6/2N5/PPPB1PPP/R2R2K1 w kq - 4 14"]
+
+14. Nxd5 exd5 15. Bxb4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "710"]
+[SetUp "1"]
+[FEN "3k3r/p7/5n1p/1pp5/4b3/2Pn2P1/P2N1PP1/3R1K1R w - - 0 24"]
+
+24. Nxe4 Nxe4 25. Rxd3+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "799"]
+[SetUp "1"]
+[FEN "rn1qk2r/pp2p1b1/2p1bpp1/3n3p/2BP4/4NN1P/PPP2PP1/R1BQ1RK1 b kq - 1 12"]
+
+12... Nxe3 13. Bxe3 Bxc4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "797"]
+[SetUp "1"]
+[FEN "r1bq1rk1/pp1nbppp/5n2/6B1/2p1N3/4P3/PPB1NPPP/R2Q1RK1 b - - 0 12"]
+
+12... Nxe4 13. Bxe4 Bxg5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "780"]
+[SetUp "1"]
+[FEN "r2qkb1r/pp1bpppp/2n2n2/1BP5/Q2N4/8/PP1P1PPP/RNB1K2R b KQkq - 2 8"]
+
+8... Nxd4 9. Qxd4 Bxb5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "549"]
+[SetUp "1"]
+[FEN "6k1/1p1r1pp1/4qb2/3Q3P/p7/P6P/KP1RB3/N1r5 w - - 0 33"]
+
+33. Qxe6 fxe6 34. Rxd7 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "688"]
+[SetUp "1"]
+[FEN "8/5p2/2k1p3/1p3rp1/1P5p/2K1BR2/5P2/8 w - - 3 51"]
+
+51. Rxf5 exf5 52. Bxg5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "756"]
+[SetUp "1"]
+[FEN "r2r2k1/pp4pp/2bp4/3qpP2/2Q1N1P1/3P3P/PP3P2/R4RK1 b - - 4 21"]
+
+21... Qxc4 22. dxc4 Bxe4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "775"]
+[SetUp "1"]
+[FEN "1r6/5pkp/6p1/4P3/rnR2P2/6P1/2B4P/1R4K1 b - - 5 32"]
+
+32... Nxc2 33. Rxa4 Rxb1+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "797"]
+[SetUp "1"]
+[FEN "rnb1k2r/pp1p1ppp/8/q2n4/1b6/2N2N2/PP1BP1PP/R2QKB1R w KQkq - 2 10"]
+
+10. Nxd5 Qxd5 11. Bxb4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "775"]
+[SetUp "1"]
+[FEN "rnb1k2r/pp1p1ppp/8/q2np3/1b6/2N5/PP1BPPPP/R2QKBNR w KQkq - 0 8"]
+
+8. Nxd5 Qxd5 9. Bxb4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "758"]
+[SetUp "1"]
+[FEN "8/1k6/2p5/1p1b2p1/7r/P2K3p/1P5R/4B3 w - - 4 56"]
+
+56. Bxh4 gxh4 57. Rxh3 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "788"]
+[SetUp "1"]
+[FEN "r3k2r/pp3ppp/2p1pq2/4n3/6b1/3P1N2/PPP1BPPP/1R1Q1RK1 w kq - 4 14"]
+
+14. Nxe5 Qxe5 15. Bxg4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "789"]
+[SetUp "1"]
+[FEN "2k4r/1pp2ppp/p1p5/3n1b2/1b6/2NP3P/PPPB1PP1/R3NK2 w - - 5 16"]
+
+16. Nxd5 cxd5 17. Bxb4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "734"]
+[SetUp "1"]
+[FEN "5r1k/p7/2p2q2/1bPpQ3/3P1R1P/8/P2R2PK/8 b - - 0 50"]
+
+50... Qxe5 51. dxe5 Rxf4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "783"]
+[SetUp "1"]
+[FEN "8/pp4pk/3qp1rp/3p4/3P1PQ1/2P4P/PP3K2/R4R2 b - - 2 24"]
+
+24... Rxg4 25. hxg4 Qxf4+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "737"]
+[SetUp "1"]
+[FEN "r2qr1k1/ppp1bp1p/3p1np1/3P2B1/4N3/5Q2/PPP2PPP/R4RK1 b - - 5 16"]
+
+16... Nxe4 17. Qxe4 Bxg5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "712"]
+[SetUp "1"]
+[FEN "8/3k1ppp/3p4/1b1P4/p6P/RrN3K1/5PP1/8 w - - 6 37"]
+
+37. Rxb3 axb3 38. Nxb5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "654"]
+[SetUp "1"]
+[FEN "1r6/nR3pkp/4p1p1/pP6/4BP2/P6P/6P1/6K1 b - - 0 28"]
+
+28... Rxb7 29. Bxb7 Nxb5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "778"]
+[SetUp "1"]
+[FEN "r4rk1/p2qnp1p/1p4p1/3p1b2/Q2P4/8/PP1N1PPP/R3RBK1 w - - 3 17"]
+
+17. Qxd7 Bxd7 18. Rxe7 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "760"]
+[SetUp "1"]
+[FEN "r4rk1/p4ppp/2p5/3np3/1b6/1NNb1P2/PP1B2PP/R3K2R w KQ - 3 16"]
+
+16. Nxd5 cxd5 17. Bxb4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "782"]
+[SetUp "1"]
+[FEN "2r1q1k1/1R1Q4/2N1p2p/p2p1p2/2p5/2P1P3/P2K4/8 b - - 0 36"]
+
+36... Qxd7 37. Rxd7 Rxc6 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "605"]
+[SetUp "1"]
+[FEN "3r4/4k3/3q2p1/6P1/1Q1N1P2/2P5/P2K4/8 b - - 0 43"]
+
+43... Qxb4 44. cxb4 Rxd4+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "788"]
+[SetUp "1"]
+[FEN "8/5pkp/3p2p1/2p1n3/4P3/2QB3P/4NKP1/q7 b - - 1 36"]
+
+36... Qxc3 37. Nxc3 Nxd3+ *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "798"]
+[SetUp "1"]
+[FEN "1r1qr1k1/1b2bppp/p1p2n2/6B1/P2pN3/1P1Q1B2/2P2PPP/R4RK1 b - - 1 16"]
+
+16... Nxe4 17. Bxe4 Bxg5 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "676"]
+[SetUp "1"]
+[FEN "8/8/p1k5/2pp4/2p1qp2/P7/1P1B4/2K1R3 w - - 0 51"]
+
+51. Rxe4 dxe4 52. Bxf4 *
+
+[Event "Lichess Puzzle"]
+[Result "*"]
+[Rating "552"]
+[SetUp "1"]
+[FEN "r3k2r/pp4pp/4p3/5p2/3pqb2/5Q1P/PPP3K1/R4RN1 w kq - 0 23"]
+
+23. Qxe4 fxe4 24. Rxf4 *
