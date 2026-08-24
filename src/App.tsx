@@ -28,6 +28,7 @@ type BoardTheme = "print" | "classic" | "blue" | "green" | "mono";
 type PieceTheme = "standard" | "staunty";
 type AnswerStyle = "standard" | "small-kid";
 type Language = "en" | "vi";
+type PasteMode = "pgn" | "fen";
 
 type ExportWorksheetState = {
   answerStyle?: AnswerStyle;
@@ -142,6 +143,7 @@ const translations = {
       `${count} FEN puzzles saved from part_001.pgn.`,
     font: "Font",
     imagePdfFailed: "Image PDF export failed.",
+    importPastedFen: "Import pasted FEN",
     importPastedPgn: "Import pasted PGN",
     includeCoverPage: "Include cover page",
     instructions: "Instructions",
@@ -151,6 +153,7 @@ const translations = {
     loadFirstPage: "Load first page",
     noPuzzlesSelected: "No puzzles selected.",
     noRating: "No rating",
+    noFenLines: "Paste at least one FEN position, one position per line.",
     noValidFen:
       "No valid FEN puzzle positions found. This phase supports PGN puzzle packs with FEN tags.",
     page: "Page",
@@ -158,6 +161,8 @@ const translations = {
       "Upload or paste a FEN-tagged PGN puzzle pack, then build a worksheet book with 9 puzzles per page.",
     pastePgn: "Paste PGN",
     pastePgnPlaceholder: "Paste PGN with FEN tags here...",
+    pasteFen: "Paste FEN",
+    pasteFenPlaceholder: "Paste one FEN position per line...",
     phase: "Made with love by Thầy An - Phase 3",
     pieceSet: "Piece set",
     printSavePdf: "Print / Save PDF",
@@ -207,6 +212,7 @@ const translations = {
       `${count} bài có FEN đã lưu từ part_001.pgn.`,
     font: "Phông chữ",
     imagePdfFailed: "Xuất PDF dạng ảnh thất bại.",
+    importPastedFen: "Nhập FEN đã dán",
     importPastedPgn: "Nhập PGN đã dán",
     includeCoverPage: "Thêm trang bìa",
     instructions: "Hướng dẫn",
@@ -216,6 +222,7 @@ const translations = {
     loadFirstPage: "Tải trang đầu",
     noPuzzlesSelected: "Chưa chọn bài nào.",
     noRating: "Chưa có rating",
+    noFenLines: "Hãy dán ít nhất một thế cờ FEN, mỗi thế cờ một dòng.",
     noValidFen:
       "Không tìm thấy thế cờ FEN hợp lệ. Giai đoạn này hỗ trợ PGN có tag FEN.",
     page: "Trang",
@@ -223,6 +230,8 @@ const translations = {
       "Tải lên hoặc dán bộ bài PGN có FEN, rồi tạo tập bài in với 9 bài mỗi trang.",
     pastePgn: "Dán PGN",
     pastePgnPlaceholder: "Dán PGN có tag FEN vào đây...",
+    pasteFen: "Dán FEN",
+    pasteFenPlaceholder: "Dán mỗi thế cờ FEN trên một dòng...",
     phase: "Made with love by Thầy An - Giai đoạn 3",
     pieceSet: "Bộ quân cờ",
     printSavePdf: "In / Lưu PDF",
@@ -443,6 +452,21 @@ function parsePuzzlePack(pgn: string, sourceKey = "pack"): Puzzle[] {
       };
     })
     .filter((puzzle): puzzle is Puzzle => puzzle !== null);
+}
+
+function parseFenLines(fenText: string, sourceKey = "fen-lines"): Puzzle[] {
+  return fenText
+    .split(/\r?\n/)
+    .map((fen) => fen.trim())
+    .filter(Boolean)
+    .map((fen, index) => ({
+      id: `${sourceKey}-${index + 1}`,
+      number: index + 1,
+      fen,
+      answer: "",
+      sideToMove: sideFromFen(fen),
+      prompt: defaultPuzzlePrompt(index + 1, undefined, "en"),
+    }));
 }
 
 function chunkPuzzles(puzzles: Puzzle[], size: number) {
@@ -716,7 +740,9 @@ function App() {
     bundledPuzzles.slice(0, 9).map((puzzle) => puzzle.id),
   );
   const [promptEdits, setPromptEdits] = useState<Record<string, string>>({});
+  const [pasteMode, setPasteMode] = useState<PasteMode>("pgn");
   const [pgnText, setPgnText] = useState("");
+  const [fenText, setFenText] = useState("");
   const [importMessage, setImportMessage] = useState(bundledPackMessage("en"));
   const [isImageExporting, setIsImageExporting] = useState(false);
   const [exportStateLoaded, setExportStateLoaded] = useState(!exportStateId);
@@ -805,6 +831,23 @@ function App() {
           ? "Bài tập cờ vua đã nhập"
           : "Imported Chess Homework"),
     );
+    setSelectedPuzzleIds(imported.slice(0, 9).map((puzzle) => puzzle.id));
+    setBookPageTarget(1);
+    setPromptEdits({});
+    setImportMessage(t.puzzlesImported(imported.length));
+  };
+
+  const importFen = (text: string) => {
+    const imported = parseFenLines(text, `fen-import-${Date.now()}`);
+
+    if (imported.length === 0) {
+      setImportMessage(t.noFenLines);
+      return;
+    }
+
+    setPuzzlePool(imported);
+    setPuzzleSourceName("Pasted FEN");
+    setTitle(language === "vi" ? "Bài tập FEN đã nhập" : "Imported FEN Positions");
     setSelectedPuzzleIds(imported.slice(0, 9).map((puzzle) => puzzle.id));
     setBookPageTarget(1);
     setPromptEdits({});
@@ -1017,21 +1060,51 @@ function App() {
                   }
                 />
               </label>
+              <div className="paste-tabs" role="tablist" aria-label="Paste format">
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={pasteMode === "pgn"}
+                  className={pasteMode === "pgn" ? "active" : ""}
+                  onClick={() => setPasteMode("pgn")}
+                >
+                  {t.pastePgn}
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={pasteMode === "fen"}
+                  className={pasteMode === "fen" ? "active" : ""}
+                  onClick={() => setPasteMode("fen")}
+                >
+                  {t.pasteFen}
+                </button>
+              </div>
               <label>
-                {t.pastePgn}
+                {pasteMode === "pgn" ? t.pastePgn : t.pasteFen}
                 <textarea
                   rows={5}
-                  placeholder={t.pastePgnPlaceholder}
-                  value={pgnText}
-                  onChange={(event) => setPgnText(event.target.value)}
+                  placeholder={
+                    pasteMode === "pgn"
+                      ? t.pastePgnPlaceholder
+                      : t.pasteFenPlaceholder
+                  }
+                  value={pasteMode === "pgn" ? pgnText : fenText}
+                  onChange={(event) =>
+                    pasteMode === "pgn"
+                      ? setPgnText(event.target.value)
+                      : setFenText(event.target.value)
+                  }
                 />
               </label>
               <button
                 type="button"
                 className="secondary-button"
-                onClick={() => importPgn(pgnText)}
+                onClick={() =>
+                  pasteMode === "pgn" ? importPgn(pgnText) : importFen(fenText)
+                }
               >
-                {t.importPastedPgn}
+                {pasteMode === "pgn" ? t.importPastedPgn : t.importPastedFen}
               </button>
               <p className="import-message">{importMessage}</p>
             </div>
