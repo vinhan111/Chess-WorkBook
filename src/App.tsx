@@ -864,6 +864,17 @@ function App() {
     });
   };
 
+  const updatePuzzleSideToMove = (
+    puzzleId: string,
+    sideToMove: SideToMove,
+  ) => {
+    setPuzzlePool((current) =>
+      current.map((puzzle) =>
+        puzzle.id === puzzleId ? { ...puzzle, sideToMove } : puzzle,
+      ),
+    );
+  };
+
   const handleFileImport = async (file: File | null) => {
     if (!file) {
       return;
@@ -1153,7 +1164,19 @@ function App() {
                       onChange={() => togglePuzzleSelection(puzzle.id)}
                     />
                     <span>#{puzzle.number}</span>
-                    <strong>{sideLabel(puzzle.sideToMove, language)}</strong>
+                    <select
+                      aria-label={`${t.sideToMove} #${puzzle.number}`}
+                      value={puzzle.sideToMove}
+                      onChange={(event) =>
+                        updatePuzzleSideToMove(
+                          puzzle.id,
+                          event.target.value as SideToMove,
+                        )
+                      }
+                    >
+                      <option value="White">{t.sideWhite}</option>
+                      <option value="Black">{t.sideBlack}</option>
+                    </select>
                     <em>
                       {puzzle.rating
                         ? `${t.rating} ${puzzle.rating}`

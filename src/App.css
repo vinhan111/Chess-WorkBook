@@ -416,7 +416,7 @@ textarea:focus {
   border-radius: 10px;
   display: grid;
   gap: 8px;
-  grid-template-columns: 16px 42px 44px minmax(0, 1fr);
+  grid-template-columns: 16px 42px 78px minmax(0, 1fr);
   padding: 8px;
   text-transform: none;
 }
@@ -424,6 +424,13 @@ textarea:focus {
 .puzzle-option input {
   height: 14px;
   width: 14px;
+}
+
+.puzzle-option select {
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 6px;
 }
 
 .puzzle-option span,
