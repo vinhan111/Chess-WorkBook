@@ -258,6 +258,27 @@ textarea:focus {
   opacity: 0.72;
 }
 
+.fen-export-button {
+  background: #e8f7ef;
+  border: 1px solid #78c69c;
+  border-radius: 14px;
+  color: #14532d;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  min-height: 44px;
+  padding: 12px 16px;
+}
+
+.fen-export-button:hover {
+  background: #d3f0df;
+}
+
+.fen-export-button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
 .pack-card {
   background: linear-gradient(145deg, #ebfbff, #eef6ff);
   border: 1px solid #b9d7e9;
@@ -826,6 +847,230 @@ textarea:focus {
 
 .compact-puzzle {
   justify-content: flex-start;
+  position: relative;
+}
+
+.puzzle-edit-button {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  height: 28px;
+  justify-content: center;
+  opacity: 0;
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  transition: opacity 0.15s ease;
+  width: 28px;
+  z-index: 1;
+}
+
+.puzzle-edit-button svg {
+  height: 17px;
+  width: 17px;
+}
+
+.compact-puzzle:hover .puzzle-edit-button,
+.compact-puzzle:focus-within .puzzle-edit-button {
+  opacity: 1;
+}
+
+.puzzle-edit-button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+@media (hover: none) {
+  .puzzle-edit-button {
+    opacity: 1;
+  }
+}
+
+.position-dialog {
+  background: #ffffff;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.28);
+  color: #0f172a;
+  inset: 0;
+  margin: auto;
+  max-height: calc(100vh - 32px);
+  max-width: min(810px, calc(100vw - 32px));
+  overflow: auto;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+}
+
+.position-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.68);
+}
+
+.position-dialog-header,
+.position-dialog-actions {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.position-dialog-header h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.position-close {
+  background: transparent;
+  border: 0;
+  color: #475569;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.position-hint {
+  color: #475569;
+  font-size: 13px;
+  margin: 8px 0 18px;
+}
+
+.position-editor-layout {
+  align-items: start;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) 220px;
+}
+
+.position-board {
+  border: 1px solid #64748b;
+  aspect-ratio: 1;
+  max-width: 500px;
+  position: relative;
+  width: 100%;
+}
+
+.position-board-visual,
+.position-board-overlay {
+  inset: 0;
+  position: absolute;
+}
+
+.position-board-visual .cm-chessboard {
+  height: 100%;
+  width: 100%;
+}
+
+.position-board-overlay {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.position-square {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  min-width: 0;
+  padding: 0;
+}
+
+.position-square.selected {
+  box-shadow: inset 0 0 0 4px #2563eb;
+}
+
+.position-square:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: -3px;
+}
+
+.position-tools {
+  display: grid;
+  gap: 14px;
+}
+
+.position-palette {
+  display: grid;
+  gap: 4px;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.position-palette button {
+  aspect-ratio: 1;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  cursor: grab;
+  padding: 0;
+}
+
+.position-palette svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.position-palette button.active,
+.position-tool-actions button.active {
+  background: #dbeafe;
+  border-color: #2563eb;
+  color: #1e40af;
+}
+
+.position-tool-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.position-tool-actions button,
+.position-dialog-actions button {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #0f172a;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 12px;
+}
+
+.position-side-label {
+  display: grid;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 6px;
+}
+
+.position-side-label select {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font: inherit;
+  padding: 8px;
+}
+
+.position-dialog-actions {
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.position-dialog-actions .position-save {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .position-editor-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .position-palette {
+    max-width: 300px;
+  }
 }
 
 .board-slot {

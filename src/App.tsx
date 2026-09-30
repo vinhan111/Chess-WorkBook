@@ -29,6 +29,10 @@ type PieceTheme = "standard" | "staunty";
 type AnswerStyle = "standard" | "small-kid";
 type Language = "en" | "vi";
 type PasteMode = "pgn" | "fen";
+type EditorTool = "move" | "erase" | string;
+
+const validPieces = new Set("KQRBNPkqrbnp");
+const pieceTypes = ["K", "Q", "R", "B", "N", "P"];
 
 type ExportWorksheetState = {
   answerStyle?: AnswerStyle;
@@ -137,7 +141,14 @@ const translations = {
     date: "Date",
     difficultyArt: "Difficulty art",
     exportImagePdf: "Export Image PDF",
+    exportFens: "Export FENs",
     exportingImagePdf: "Exporting image PDF...",
+    editPosition: "Edit position",
+    movePiece: "Move piece",
+    erasePiece: "Erase piece",
+    savePosition: "Save position",
+    cancel: "Cancel",
+    editPositionHint: "Choose a piece, then select a square. Drag pieces to move them.",
     firstPuzzlePack: "First puzzle pack",
     firstPuzzlePackInfo: (count: number) =>
       `${count} FEN puzzles saved from part_001.pgn.`,
@@ -206,7 +217,14 @@ const translations = {
     date: "Ngày",
     difficultyArt: "Hình độ khó",
     exportImagePdf: "Xuất PDF dạng ảnh",
+    exportFens: "Xuất FENs",
     exportingImagePdf: "Đang xuất PDF ảnh...",
+    editPosition: "Chỉnh thế cờ",
+    movePiece: "Di chuyển quân",
+    erasePiece: "Xóa quân",
+    savePosition: "Lưu thế cờ",
+    cancel: "Hủy",
+    editPositionHint: "Chọn quân rồi chọn ô cờ. Kéo quân để di chuyển.",
     firstPuzzlePack: "Bộ bài đầu tiên",
     firstPuzzlePackInfo: (count: number) =>
       `${count} bài có FEN đã lưu từ part_001.pgn.`,
@@ -601,6 +619,213 @@ function ChessDiagram({
   );
 }
 
+function boardFromFen(fen: string): string[][] {
+  const ranks = fen.trim().split(/\s+/)[0].split("/");
+  return Array.from({ length: 8 }, (_, rankIndex) => {
+    const rank = ranks[rankIndex] ?? "8";
+    const squares: string[] = [];
+    for (const value of rank) {
+      if (/^[1-8]$/.test(value)) {
+        squares.push(...Array(Number(value)).fill(""));
+      } else if (validPieces.has(value)) {
+        squares.push(value);
+      }
+    }
+    return Array.from({ length: 8 }, (_, index) => squares[index] ?? "");
+  });
+}
+
+function fenFromBoard(board: string[][], sideToMove: SideToMove): string {
+  const placement = board.map((rank) => {
+    let empty = 0;
+    let result = "";
+    for (const piece of rank) {
+      if (piece) {
+        if (empty) result += empty;
+        result += piece;
+        empty = 0;
+      } else {
+        empty += 1;
+      }
+    }
+    return result + (empty || "");
+  }).join("/");
+  return `${placement} ${sideToMove === "Black" ? "b" : "w"} - - 0 1`;
+}
+
+function PositionEditor({
+  language,
+  onClose,
+  onSave,
+  puzzle,
+}: {
+  language: Language;
+  onClose: () => void;
+  onSave: (fen: string, sideToMove: SideToMove) => void;
+  puzzle: Puzzle;
+}) {
+  const t = translations[language];
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const boardElement = useRef<HTMLDivElement | null>(null);
+  const [board, setBoard] = useState(() => boardFromFen(puzzle.fen));
+  const [sideToMove, setSideToMove] = useState(puzzle.sideToMove);
+  const [tool, setTool] = useState<EditorTool>("move");
+  const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    dialog?.showModal();
+    return () => {
+      if (dialog?.open) dialog.close();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!boardElement.current) return;
+    const chessboard = new Chessboard(boardElement.current, {
+      position: fenFromBoard(board, sideToMove),
+      orientation: sideToMove === "Black" ? COLOR.black : COLOR.white,
+      responsive: true,
+      assetsUrl: "/cm-chessboard/assets/",
+      assetsCache: false,
+      style: {
+        cssClass: "default",
+        pieces: { file: "pieces/standard.svg" },
+        showCoordinates: false,
+        borderType: BORDER_TYPE.none,
+        animationDuration: 0,
+      },
+    });
+    return () => chessboard.destroy();
+  }, [board, sideToMove]);
+
+  const putPiece = (index: number, piece: string) => {
+    setBoard((current) => {
+      const next = current.map((rank) => [...rank]);
+      next[Math.floor(index / 8)][index % 8] = piece;
+      return next;
+    });
+    setSelectedSquare(null);
+  };
+
+  const movePiece = (from: number, to: number) => {
+    if (from === to) return;
+    setBoard((current) => {
+      const next = current.map((rank) => [...rank]);
+      const piece = next[Math.floor(from / 8)][from % 8];
+      next[Math.floor(from / 8)][from % 8] = "";
+      next[Math.floor(to / 8)][to % 8] = piece;
+      return next;
+    });
+    setSelectedSquare(null);
+  };
+
+  const selectSquare = (index: number) => {
+    if (tool === "erase") {
+      putPiece(index, "");
+    } else if (tool !== "move") {
+      putPiece(index, tool);
+    } else if (selectedSquare !== null) {
+      if (selectedSquare === index) setSelectedSquare(null);
+      else movePiece(selectedSquare, index);
+    } else if (board[Math.floor(index / 8)][index % 8]) {
+      setSelectedSquare(index);
+    }
+  };
+
+  const chooseTool = (nextTool: EditorTool) => {
+    setTool(nextTool);
+    setSelectedSquare(null);
+  };
+
+  return (
+    <dialog className="position-dialog no-print" ref={dialogRef} onCancel={onClose}>
+      <div className="position-dialog-header">
+        <h2>{t.editPosition} #{puzzle.number}</h2>
+        <button type="button" className="position-close" aria-label={t.cancel} onClick={onClose}>×</button>
+      </div>
+      <p className="position-hint">{t.editPositionHint}</p>
+      <div className="position-editor-layout">
+        <div className="position-board" aria-label={t.editPosition}>
+          <div className="position-board-visual" ref={boardElement} aria-hidden="true" />
+          <div className="position-board-overlay">
+          {Array.from({ length: 64 }, (_, displayIndex) => {
+            const displayRow = Math.floor(displayIndex / 8);
+            const displayColumn = displayIndex % 8;
+            const row = sideToMove === "Black" ? 7 - displayRow : displayRow;
+            const column = sideToMove === "Black" ? 7 - displayColumn : displayColumn;
+            const index = row * 8 + column;
+            const piece = board[row]?.[column] ?? "";
+            const square = `${String.fromCharCode(97 + column)}${8 - row}`;
+            return (
+              <button
+                type="button"
+                key={square}
+                className={`position-square${selectedSquare === index ? " selected" : ""}`}
+                aria-label={`${square}${piece ? ` ${piece}` : ""}`}
+                aria-pressed={selectedSquare === index}
+                draggable={Boolean(piece)}
+                onClick={() => selectSquare(index)}
+                onDragStart={(event) => {
+                  event.dataTransfer.setData("text/plain", `square:${index}`);
+                  event.dataTransfer.effectAllowed = "move";
+                }}
+                onDragOver={(event) => event.preventDefault()}
+                onDrop={(event) => {
+                  event.preventDefault();
+                  const source = event.dataTransfer.getData("text/plain");
+                  if (source.startsWith("square:")) movePiece(Number(source.slice(7)), index);
+                  else if (source.startsWith("piece:")) putPiece(index, source.slice(6));
+                }}
+              >
+              </button>
+            );
+          })}
+          </div>
+        </div>
+        <div className="position-tools">
+          <div className="position-palette">
+            {pieceTypes.flatMap((type) => [type, type.toLowerCase()]).map((piece) => (
+              <button
+                type="button"
+                key={piece}
+                className={tool === piece ? "active" : ""}
+                aria-label={`${piece === piece.toUpperCase() ? t.sideWhite : t.sideBlack} ${piece.toUpperCase()}`}
+                aria-pressed={tool === piece}
+                draggable
+                onClick={() => chooseTool(piece)}
+                onDragStart={(event) => event.dataTransfer.setData("text/plain", `piece:${piece}`)}
+              >
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <use href={`/cm-chessboard/assets/pieces/standard.svg#${piece === piece.toUpperCase() ? "w" : "b"}${piece.toLowerCase()}`} />
+                </svg>
+              </button>
+            ))}
+          </div>
+          <div className="position-tool-actions">
+            <button type="button" className={tool === "move" ? "active" : ""} aria-pressed={tool === "move"} onClick={() => chooseTool("move")}>{t.movePiece}</button>
+            <button type="button" className={tool === "erase" ? "active" : ""} aria-pressed={tool === "erase"} onClick={() => chooseTool("erase")}>{t.erasePiece}</button>
+          </div>
+          <label className="position-side-label">
+            {t.sideToMove}
+            <select value={sideToMove} onChange={(event) => setSideToMove(event.target.value as SideToMove)}>
+              <option value="White">{t.sideWhite}</option>
+              <option value="Black">{t.sideBlack}</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div className="position-dialog-actions">
+        <button type="button" onClick={onClose}>{t.cancel}</button>
+        <button type="button" className="position-save" onClick={() => {
+          onSave(fenFromBoard(board, sideToMove), sideToMove);
+          onClose();
+        }}>{t.savePosition}</button>
+      </div>
+    </dialog>
+  );
+}
+
 function AnswerBox({
   answerStyle,
   language,
@@ -745,6 +970,7 @@ function App() {
   const [fenText, setFenText] = useState("");
   const [importMessage, setImportMessage] = useState(bundledPackMessage("en"));
   const [isImageExporting, setIsImageExporting] = useState(false);
+  const [editingPuzzleId, setEditingPuzzleId] = useState<string | null>(null);
   const [exportStateLoaded, setExportStateLoaded] = useState(!exportStateId);
   const [language, setLanguage] = useState<Language>("en");
   const puzzlesPerPage = gridColumns * gridRows;
@@ -757,6 +983,7 @@ function App() {
       ...puzzle,
       prompt: promptEdits[puzzle.id] ?? puzzle.prompt,
     }));
+  const editingPuzzle = puzzlePool.find((puzzle) => puzzle.id === editingPuzzleId);
   const worksheetPages = chunkPuzzles(puzzles, puzzlesPerPage);
   const maxAvailablePages = Math.min(
     MAX_BOOK_PAGES,
@@ -870,9 +1097,35 @@ function App() {
   ) => {
     setPuzzlePool((current) =>
       current.map((puzzle) =>
-        puzzle.id === puzzleId ? { ...puzzle, sideToMove } : puzzle,
+        puzzle.id === puzzleId
+          ? {
+              ...puzzle,
+              sideToMove,
+              fen: puzzle.fen.trim().split(/\s+/).map((field, index) =>
+                index === 1 ? (sideToMove === "Black" ? "b" : "w") : field,
+              ).join(" "),
+            }
+          : puzzle,
       ),
     );
+  };
+
+  const savePuzzlePosition = (puzzleId: string, fen: string, sideToMove: SideToMove) => {
+    setPuzzlePool((current) => current.map((puzzle) =>
+      puzzle.id === puzzleId ? { ...puzzle, fen, sideToMove } : puzzle,
+    ));
+  };
+
+  const exportFens = () => {
+    const content = `${puzzlePool.map((puzzle) => puzzle.fen).join("\n")}\n`;
+    const url = URL.createObjectURL(new Blob([content], { type: "text/plain;charset=utf-8" }));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${sanitizeFilename(puzzleSourceName || title)}-positions.fen`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 0);
   };
 
   const handleFileImport = async (file: File | null) => {
@@ -1426,6 +1679,9 @@ function App() {
               >
                 {isImageExporting ? t.exportingImagePdf : t.exportImagePdf}
               </button>
+              <button type="button" className="fen-export-button" disabled={puzzlePool.length === 0} onClick={exportFens}>
+                {t.exportFens}
+              </button>
             </div>
           </section>
         </div>
@@ -1538,6 +1794,19 @@ function App() {
                         {!showPuzzlePrompts && (
                           <p className="puzzle-number">#{globalIndex + 1}</p>
                         )}
+                        {!showPuzzlePrompts && (
+                          <button
+                            type="button"
+                            className="puzzle-edit-button no-print"
+                            aria-label={`${t.editPosition} #${globalIndex + 1}`}
+                            title={t.editPosition}
+                            onClick={() => setEditingPuzzleId(puzzle.id)}
+                          >
+                            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6.7 6.7a2 2 0 0 0 2.8 2.8l6.7-6.7a4 4 0 0 0 5.4-5.4l-2.8 2.8-2.8-2.8 2.8-2.8Z" />
+                            </svg>
+                          </button>
+                        )}
                         <div className="board-slot">
                           <ChessDiagram
                             boardTheme={boardTheme}
@@ -1560,6 +1829,15 @@ function App() {
           )}
         </div>
       </section>
+      {editingPuzzle && (
+        <PositionEditor
+          key={editingPuzzle.id}
+          language={language}
+          puzzle={editingPuzzle}
+          onClose={() => setEditingPuzzleId(null)}
+          onSave={(fen, sideToMove) => savePuzzlePosition(editingPuzzle.id, fen, sideToMove)}
+        />
+      )}
     </main>
   );
 }
